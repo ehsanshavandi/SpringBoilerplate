@@ -1,8 +1,14 @@
 package com.ehsancode.demo;
 
 import java.lang.reflect.Method;
+import java.util.List;
+
+import com.ehsancode.demo.customer.Customer;
+import com.ehsancode.demo.customer.CustomerRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

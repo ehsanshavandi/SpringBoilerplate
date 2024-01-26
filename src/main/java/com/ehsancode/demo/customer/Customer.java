@@ -7,9 +7,11 @@ public class Customer {
   @Id
   @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_sequence")
+  @Column(updatable = false)
   private Integer id;
 
-  private String name;
+  private String firstName;
+  private String lastName;
 
   @Column(nullable = false, unique = true)
   private String email;
@@ -18,9 +20,9 @@ public class Customer {
 
   public Customer() {}
 
-  public Customer(Integer id, String name, String email, Integer age) {
-    this.id = id;
-    this.name = name;
+  public Customer(String firstName, String lastName, String email, Integer age) {
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.email = email;
     this.age = age;
   }
@@ -33,12 +35,20 @@ public class Customer {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
   public String getEmail() {
@@ -55,5 +65,17 @@ public class Customer {
 
   public void setAge(Integer age) {
     this.age = age;
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("Customer{");
+    sb.append("id=").append(id);
+    sb.append(", firstName='").append(firstName).append('\'');
+    sb.append(", lastName='").append(lastName).append('\'');
+    sb.append(", email='").append(email).append('\'');
+    sb.append(", age=").append(age);
+    sb.append('}');
+    return sb.toString();
   }
 }
