@@ -1,9 +1,8 @@
 package com.ehsancode.demo.customer;
 
-import org.springframework.stereotype.Service;
-
-import java.util.Collections;
+import com.ehsancode.demo.helper.exception.NotFoundException;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
@@ -20,7 +19,12 @@ public class CustomerService {
   public Customer selectCustomerById(int id) {
     return this.customerRepository
         .findById(id)
-        .orElseThrow(() -> new IllegalStateException("Customer Not Found"));
+        .orElseThrow(
+            () -> {
+              StringBuilder msg = new StringBuilder("Customer ");
+              msg.append(id).append(" Not Found");
+              return new NotFoundException(msg.toString());
+            });
   }
 
   public void createCustomer(Customer customer) {
