@@ -1,6 +1,8 @@
 package com.ehsancode.demo.customer;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Customer {
@@ -10,10 +12,11 @@ public class Customer {
   @Column(updatable = false)
   private Integer id;
 
-  private String firstName;
-  private String lastName;
+  @NotBlank private String firstName;
+  @NotBlank private String lastName;
 
   @Column(nullable = false, unique = true)
+  @Email
   private String email;
 
   private Integer age;
