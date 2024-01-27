@@ -3,6 +3,7 @@ package com.ehsancode.demo.customer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 public class Customer {
@@ -21,13 +22,19 @@ public class Customer {
 
   private Integer age;
 
+  @Pattern(
+      regexp = "(?:^[0-9]{11}$)|(?:^(\\d[-\\.])?[0-9]{3}[-\\.][0-9]{3}[-\\.][0-9]{4}$)",
+      message = "You need to pass a valid cell phone number")
+  private String phone;
+
   public Customer() {}
 
-  public Customer(String firstName, String lastName, String email, Integer age) {
+  public Customer(String firstName, String lastName, String email, Integer age, String phone) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.age = age;
+    this.phone = phone;
   }
 
   public Integer getId() {
@@ -70,6 +77,14 @@ public class Customer {
     this.age = age;
   }
 
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
   @Override
   public String toString() {
     final StringBuilder sb = new StringBuilder("Customer{");
@@ -78,6 +93,7 @@ public class Customer {
     sb.append(", lastName='").append(lastName).append('\'');
     sb.append(", email='").append(email).append('\'');
     sb.append(", age=").append(age);
+    sb.append(", phone='").append(phone).append('\'');
     sb.append('}');
     return sb.toString();
   }

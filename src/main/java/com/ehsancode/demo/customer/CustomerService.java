@@ -1,6 +1,8 @@
 package com.ehsancode.demo.customer;
 
-import com.ehsancode.demo.helper.exception.NotFoundException;
+import com.ehsancode.demo.helper.exception.ApiNotFoundException;
+import com.ehsancode.demo.helper.exception.ApiRequestException;
+
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class CustomerService {
             () -> {
               StringBuilder msg = new StringBuilder("Customer ");
               msg.append(id).append(" Not Found");
-              return new NotFoundException(msg.toString());
+              return new ApiNotFoundException(msg.toString());
             });
   }
 
