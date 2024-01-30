@@ -1,5 +1,6 @@
-package com.ehsancode.demo.customer;
+package com.ehsancode.demo.respositories;
 
+import com.ehsancode.demo.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

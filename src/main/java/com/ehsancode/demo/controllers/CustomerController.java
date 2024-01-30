@@ -1,8 +1,11 @@
-package com.ehsancode.demo.customer;
+package com.ehsancode.demo.controllers;
 
 import java.util.List;
 
+import com.ehsancode.demo.services.CustomerService;
+import com.ehsancode.demo.models.Customer;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()
@@ -15,13 +18,15 @@ public class CustomerController {
   }
 
   @GetMapping()
-  public List<Customer> getCustomers() {
-    return this.customerService.selectAllCustomers();
+  public ResponseEntity<List<Customer>> getCustomers() {
+    List<Customer> customers = this.customerService.selectAllCustomers();
+    return ResponseEntity.ok().body(customers);
   }
 
   @GetMapping(path = "{id}")
-  public Customer getCustomer(@Valid @PathVariable("id") int id) {
-    return this.customerService.selectCustomerById(id);
+  public ResponseEntity<Customer> getCustomer(@Valid @PathVariable("id") int id) {
+    Customer customer = this.customerService.selectCustomerById(id);
+    return ResponseEntity.ok().body(customer);
   }
 
   @PostMapping()

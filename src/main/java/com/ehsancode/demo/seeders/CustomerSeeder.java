@@ -1,17 +1,15 @@
-package com.ehsancode.demo.customer;
+package com.ehsancode.demo.seeders;
 
-import com.github.javafaker.Faker;
+import com.ehsancode.demo.models.Customer;
+import com.ehsancode.demo.respositories.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-
-import java.util.Locale;
 
 @Configuration
-public class Seeder implements CommandLineRunner {
+public class CustomerSeeder implements CommandLineRunner {
   private final CustomerRepository customerRepository;
 
-  public Seeder(CustomerRepository customerRepository) {
+  public CustomerSeeder(CustomerRepository customerRepository) {
     this.customerRepository = customerRepository;
   }
 

@@ -2,6 +2,8 @@ package com.ehsancode.demo.helper.exception.handler;
 
 import com.ehsancode.demo.helper.exception.ApiNotFoundException;
 import com.ehsancode.demo.helper.exception.ApiRequestException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,6 +16,8 @@ import java.util.Map;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
+  private static final Logger log = LoggerFactory.getLogger(ApiExceptionHandler.class);
+
   @ExceptionHandler(value = ApiRequestException.class)
   public ResponseEntity<Object> handleApiRequestException(ApiRequestException apiRequestException) {
     ApiException apiException =
@@ -34,6 +38,7 @@ public class ApiExceptionHandler {
             apiNotFoundException,
             HttpStatus.NOT_FOUND,
             ZonedDateTime.now());
+    log.error(apiException.toString());
     return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
   }
 

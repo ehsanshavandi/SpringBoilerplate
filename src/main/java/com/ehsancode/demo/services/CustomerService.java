@@ -1,9 +1,11 @@
-package com.ehsancode.demo.customer;
+package com.ehsancode.demo.services;
 
 import com.ehsancode.demo.helper.exception.ApiNotFoundException;
-import com.ehsancode.demo.helper.exception.ApiRequestException;
 
 import java.util.List;
+
+import com.ehsancode.demo.models.Customer;
+import com.ehsancode.demo.respositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,12 +23,7 @@ public class CustomerService {
   public Customer selectCustomerById(int id) {
     return this.customerRepository
         .findById(id)
-        .orElseThrow(
-            () -> {
-              StringBuilder msg = new StringBuilder("Customer ");
-              msg.append(id).append(" Not Found");
-              return new ApiNotFoundException(msg.toString());
-            });
+        .orElseThrow(() -> new ApiNotFoundException("Customer " + id + " Not Found"));
   }
 
   public void createCustomer(Customer customer) {
