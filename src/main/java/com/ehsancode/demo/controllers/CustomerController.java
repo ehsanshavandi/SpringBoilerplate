@@ -3,7 +3,7 @@ package com.ehsancode.demo.controllers;
 import java.util.List;
 
 import com.ehsancode.demo.services.CustomerService;
-import com.ehsancode.demo.models.Customer;
+import com.ehsancode.demo.dao.models.Customer;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

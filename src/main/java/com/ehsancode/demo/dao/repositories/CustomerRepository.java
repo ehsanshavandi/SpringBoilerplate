@@ -1,6 +1,6 @@
 package com.ehsancode.demo.dao.repositories;
 
-import com.ehsancode.demo.models.Customer;
+import com.ehsancode.demo.dao.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -4,7 +4,7 @@ import com.ehsancode.demo.helper.exception.ApiNotFoundException;
 
 import java.util.List;
 
-import com.ehsancode.demo.models.Customer;
+import com.ehsancode.demo.dao.models.Customer;
 import com.ehsancode.demo.dao.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
