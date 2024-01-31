@@ -1,4 +1,4 @@
-package com.ehsancode.demo.respositories;
+package com.ehsancode.demo.dao.repositories;
 
 import com.ehsancode.demo.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

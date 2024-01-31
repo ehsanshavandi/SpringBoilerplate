@@ -1,4 +1,4 @@
-package com.ehsancode.demo.seeders;
+package com.ehsancode.demo.dao.seeders;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;

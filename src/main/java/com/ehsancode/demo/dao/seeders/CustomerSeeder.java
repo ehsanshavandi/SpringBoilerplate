@@ -1,7 +1,7 @@
-package com.ehsancode.demo.seeders;
+package com.ehsancode.demo.dao.seeders;
 
 import com.ehsancode.demo.models.Customer;
-import com.ehsancode.demo.respositories.CustomerRepository;
+import com.ehsancode.demo.dao.repositories.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
