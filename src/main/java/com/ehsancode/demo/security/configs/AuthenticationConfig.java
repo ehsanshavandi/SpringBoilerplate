@@ -1,7 +1,7 @@
 package com.ehsancode.demo.security.configs;
 
 import com.ehsancode.demo.dao.repositories.UserRepository;
-import com.ehsancode.demo.exception.ApiNotFoundException;
+import com.ehsancode.demo.exception.appexceptions.NotFoundException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,7 +25,7 @@ public class AuthenticationConfig {
     return username ->
         this.userRepository
             .findUserByEmail(username)
-            .orElseThrow(() -> new ApiNotFoundException("User " + username + " not found"));
+            .orElseThrow(() -> new NotFoundException("User " + username));
   }
 
   @Bean

@@ -1,9 +1,8 @@
 package com.ehsancode.demo.services;
 
 import com.ehsancode.demo.dao.repositories.UserRepository;
-import com.ehsancode.demo.exception.ApiNotFoundException;
+import com.ehsancode.demo.exception.appexceptions.NotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +16,6 @@ public class UserService {
   public UserDetails getUserByEmail(String email) {
     return this.userRepository
         .findUserByEmail(email)
-        .orElseThrow(() -> new ApiNotFoundException("User " + email + " Not Found"));
+        .orElseThrow(() -> new NotFoundException("User " + email));
   }
 }

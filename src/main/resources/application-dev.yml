@@ -52,3 +52,8 @@ info:
       password: "123"
       role: "ADMIN"
 
+  security:
+    jwt:
+      secret_key: "79385c727593a7b09ef2a4c38947a7b0b958e920c3aed7ec"
+      expire_token: 86400000
+

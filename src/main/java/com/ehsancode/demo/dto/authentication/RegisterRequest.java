@@ -1,18 +1,24 @@
 package com.ehsancode.demo.dto.authentication;
 
+import com.ehsancode.demo.exception.appexceptions.NotComplexPasswordException;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import java.util.regex.Pattern;
 
 public class RegisterRequest {
+  private static final Pattern hasLowerCasePattern = Pattern.compile("[a-z]+");
+  private static final Pattern hasUpperCasePattern = Pattern.compile("[A-Z]+");
+  private static final Pattern hasdigitPattern = Pattern.compile("\\d+");
+  private static final Pattern hasSymbolPattern =
+      Pattern.compile("[\\!\\@\\#\\$\\%\\^\\&\\*\\.\\,\\_=]+");
+
   @NotNull @NotBlank private String firstName;
 
   @NotNull @NotBlank private String lastName;
   @NotNull @NotBlank @Email private String email;
 
-  @Pattern(regexp = "(?:[a-z]+[A-Z]+[0-9]+[\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\)\\_\\+\\.\\,]){4,8}")
-  private String password;
+  @NotNull @NotBlank private String password;
 
   public RegisterRequest() {}
 
@@ -52,6 +58,14 @@ public class RegisterRequest {
   }
 
   public void setPassword(String password) {
+    if (!hasLowerCasePattern.matcher(password).find())
+      throw new NotComplexPasswordException("Password must be complex");
+    if (!hasUpperCasePattern.matcher(password).find())
+      throw new NotComplexPasswordException("Password must be complex");
+    if (!hasdigitPattern.matcher(password).find())
+      throw new NotComplexPasswordException("Password must be complex");
+    if (!hasSymbolPattern.matcher(password).find())
+      throw new NotComplexPasswordException("Password must be complex");
     this.password = password;
   }
 }

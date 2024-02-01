@@ -6,6 +6,7 @@ import com.ehsancode.demo.dao.repositories.UserRepository;
 import com.ehsancode.demo.dto.authentication.LoginRequest;
 import com.ehsancode.demo.dto.authentication.LoginResponse;
 import com.ehsancode.demo.dto.authentication.RegisterRequest;
+import com.ehsancode.demo.exception.appexceptions.AlreadyExistedException;
 import com.ehsancode.demo.security.services.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,6 +32,8 @@ public class AuthenticationService {
   }
 
   public LoginResponse register(RegisterRequest registerRequest) {
+    if (this.userRepository.findUserByEmail(registerRequest.getEmail()).isPresent())
+      throw new AlreadyExistedException("User " + registerRequest.getEmail());
     User user =
         new User(
             registerRequest.getFirstName(),

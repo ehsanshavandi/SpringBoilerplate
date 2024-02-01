@@ -1,7 +1,8 @@
 package com.ehsancode.demo.exception.handler;
 
-import com.ehsancode.demo.exception.ApiNotFoundException;
-import com.ehsancode.demo.exception.ApiRequestException;
+import com.ehsancode.demo.exception.appexceptions.AppException;
+import com.ehsancode.demo.exception.appexceptions.NotFoundException;
+import com.ehsancode.demo.exception.appexceptions.NotComplexPasswordException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,25 +19,13 @@ import java.util.Map;
 public class ApiExceptionHandler {
   private static final Logger log = LoggerFactory.getLogger(ApiExceptionHandler.class);
 
-  @ExceptionHandler(value = ApiRequestException.class)
-  public ResponseEntity<Object> handleApiRequestException(ApiRequestException apiRequestException) {
+  @ExceptionHandler(value = AppException.class)
+  public ResponseEntity<Object> handleAppException(AppException appException) {
     ApiException apiException =
         new ApiException(
-            apiRequestException.getMessage(),
-            apiRequestException,
-            HttpStatus.BAD_REQUEST,
-            ZonedDateTime.now());
-    return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
-  }
-
-  @ExceptionHandler(value = ApiNotFoundException.class)
-  public ResponseEntity<Object> handleApiNotFoundException(
-      ApiNotFoundException apiNotFoundException) {
-    ApiException apiException =
-        new ApiException(
-            apiNotFoundException.getMessage(),
-            apiNotFoundException,
-            HttpStatus.NOT_FOUND,
+            appException.getMessage(),
+            appException,
+            appException.getHttpStatus(),
             ZonedDateTime.now());
     log.error(apiException.toString());
     return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
@@ -53,6 +42,6 @@ public class ApiExceptionHandler {
     ApiException apiException =
         new ApiException(
             "Validation Failed", null, HttpStatus.BAD_REQUEST, ZonedDateTime.now(), errorMap);
-    return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
   }
 }
