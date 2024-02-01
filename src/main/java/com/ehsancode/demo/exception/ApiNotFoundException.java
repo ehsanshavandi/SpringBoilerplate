@@ -1,4 +1,4 @@
-package com.ehsancode.demo.helper.exception;
+package com.ehsancode.demo.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -8,16 +8,16 @@ public class ApiNotFoundException extends RuntimeException {
   private int errorCode;
   private String errorMessage;
 
+  public ApiNotFoundException(String msg) {
+    super(msg);
+  }
+
   public ApiNotFoundException(Throwable throwable) {
     super(throwable);
   }
 
   public ApiNotFoundException(String msg, Throwable throwable) {
     super(msg, throwable);
-  }
-
-  public ApiNotFoundException(String msg) {
-    super(msg);
   }
 
   public ApiNotFoundException(String message, int errorCode) {

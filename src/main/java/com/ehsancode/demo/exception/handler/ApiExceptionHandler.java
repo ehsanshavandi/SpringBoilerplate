@@ -1,7 +1,7 @@
-package com.ehsancode.demo.helper.exception.handler;
+package com.ehsancode.demo.exception.handler;
 
-import com.ehsancode.demo.helper.exception.ApiNotFoundException;
-import com.ehsancode.demo.helper.exception.ApiRequestException;
+import com.ehsancode.demo.exception.ApiNotFoundException;
+import com.ehsancode.demo.exception.ApiRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.ehsancode.demo.helper.exception.handler;
+package com.ehsancode.demo.exception.handler;
 
 import org.springframework.http.HttpStatus;
 

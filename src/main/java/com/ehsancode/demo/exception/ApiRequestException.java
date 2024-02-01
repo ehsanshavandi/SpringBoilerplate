@@ -1,4 +1,4 @@
-package com.ehsancode.demo.helper.exception;
+package com.ehsancode.demo.exception;
 
 public class ApiRequestException extends RuntimeException {
 

@@ -1,6 +1,6 @@
 package com.ehsancode.demo.services;
 
-import com.ehsancode.demo.helper.exception.ApiNotFoundException;
+import com.ehsancode.demo.exception.ApiNotFoundException;
 
 import java.util.List;
 
