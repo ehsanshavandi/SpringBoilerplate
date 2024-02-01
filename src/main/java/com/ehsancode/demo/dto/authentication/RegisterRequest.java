@@ -1,10 +1,17 @@
 package com.ehsancode.demo.dto.authentication;
 
-public class RegisterRequest {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
-  private String firstName;
-  private String lastName;
-  private String email;
+public class RegisterRequest {
+  @NotNull @NotBlank private String firstName;
+
+  @NotNull @NotBlank private String lastName;
+  @NotNull @NotBlank @Email private String email;
+
+  @Pattern(regexp = "(?:[a-z]+[A-Z]+[0-9]+[\\!\\@\\#\\$\\%\\^\\&\\*\\(\\)\\)\\_\\+\\.\\,]){4,8}")
   private String password;
 
   public RegisterRequest() {}

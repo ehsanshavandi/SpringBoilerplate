@@ -2,7 +2,6 @@ package com.ehsancode.demo.security.configs;
 
 import com.ehsancode.demo.dao.repositories.UserRepository;
 import com.ehsancode.demo.exception.ApiNotFoundException;
-import com.ehsancode.demo.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

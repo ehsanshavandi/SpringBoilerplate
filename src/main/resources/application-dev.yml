@@ -44,3 +44,11 @@ management:
 info:
   app:
     name: 'Ehsan'
+  seeder:
+    superadmin:
+      first_name: "Ehsan"
+      last_name: "Shavandi"
+      email: "superadmin@ehsan.edu"
+      password: "123"
+      role: "ADMIN"
+

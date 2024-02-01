@@ -1,5 +1,6 @@
 package com.ehsancode.demo.services;
 
+import com.ehsancode.demo.dto.customer.CreateCustomerRequest;
 import com.ehsancode.demo.exception.ApiNotFoundException;
 
 import java.util.List;
@@ -26,7 +27,17 @@ public class CustomerService {
         .orElseThrow(() -> new ApiNotFoundException("Customer " + id + " Not Found"));
   }
 
-  public void createCustomer(Customer customer) {
+  public void createCustomer(CreateCustomerRequest customerRequest) {
+    if (this.customerRepository.findCustomerByEmail(customerRequest.getEmail()).isPresent()) {
+      throw new RuntimeException();
+    }
+    final Customer customer =
+        new Customer(
+            customerRequest.getFirstName(),
+            customerRequest.getLastName(),
+            customerRequest.getEmail(),
+            customerRequest.getAge(),
+            customerRequest.getPhone());
     this.customerRepository.save(customer);
   }
 

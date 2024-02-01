@@ -3,15 +3,11 @@ package com.ehsancode.demo.dao.models;
 import com.ehsancode.demo.dao.models.enums.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import java.util.Collection;
+import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "_user")
@@ -21,11 +17,9 @@ public class User implements UserDetails {
   @Column(name = "id", nullable = false)
   private Integer id;
 
-  @NotNull @NotBlank private String firstName;
-  @NotNull @NotBlank private String lastName;
+  private String firstName;
+  private String lastName;
 
-  @NotBlank
-  @Email
   @Column(unique = true)
   private String email;
 

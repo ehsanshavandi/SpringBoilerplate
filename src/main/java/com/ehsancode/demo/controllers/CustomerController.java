@@ -2,6 +2,7 @@ package com.ehsancode.demo.controllers;
 
 import java.util.List;
 
+import com.ehsancode.demo.dto.customer.CreateCustomerRequest;
 import com.ehsancode.demo.services.CustomerService;
 import com.ehsancode.demo.dao.models.Customer;
 import jakarta.validation.Valid;
@@ -30,8 +31,8 @@ public class CustomerController {
   }
 
   @PostMapping()
-  public void addCustomer(@Valid @RequestBody Customer customer) {
-    this.customerService.createCustomer(customer);
+  public void addCustomer(@Valid @RequestBody CreateCustomerRequest createCustomerRequest) {
+    this.customerService.createCustomer(createCustomerRequest);
   }
 
   @PutMapping()

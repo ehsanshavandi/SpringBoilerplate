@@ -13,18 +13,14 @@ public class Customer {
   @Column(updatable = false)
   private Integer id;
 
-  @NotBlank private String firstName;
-  @NotBlank private String lastName;
+  private String firstName;
+  private String lastName;
 
   @Column(nullable = false, unique = true)
   @Email
   private String email;
 
   private Integer age;
-
-  @Pattern(
-      regexp = "(?:^[0-9]{11}$)|(?:^(\\d[-\\.])?[0-9]{3}[-\\.][0-9]{3}[-\\.][0-9]{4}$)",
-      message = "You need to pass a valid cell phone number")
   private String phone;
 
   public Customer() {}
