@@ -34,7 +34,7 @@ public class AuthenticationService {
   public LoginResponse register(RegisterRequest registerRequest) {
     if (this.userRepository.findUserByEmail(registerRequest.getEmail()).isPresent())
       throw new AlreadyExistedException("User " + registerRequest.getEmail());
-    User user =
+    final User user =
         new User(
             registerRequest.getFirstName(),
             registerRequest.getLastName(),
@@ -50,7 +50,7 @@ public class AuthenticationService {
     this.authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             loginRequest.getEmail(), loginRequest.getPassword()));
-    var user = this.userRepository.findUserByEmail(loginRequest.getEmail()).orElseThrow();
+    final var user = this.userRepository.findUserByEmail(loginRequest.getEmail()).orElseThrow();
     String token = this.jwtService.generateToken(user);
     return new LoginResponse(token);
   }
