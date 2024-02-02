@@ -2,10 +2,12 @@ package com.ehsancode.demo.controllers;
 
 import java.util.List;
 
+import com.ehsancode.demo.dto.ResponsePagable;
 import com.ehsancode.demo.dto.customer.CreateCustomerRequest;
 import com.ehsancode.demo.services.CustomerService;
 import com.ehsancode.demo.dao.models.Customer;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Null;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +21,10 @@ public class CustomerController {
   }
 
   @GetMapping()
-  public ResponseEntity<List<Customer>> getCustomers() {
-    List<Customer> customers = this.customerService.selectAllCustomers();
+  public ResponseEntity<ResponsePagable<Customer>> getCustomers(
+      @Valid @RequestParam(defaultValue = "0") int page,
+      @Valid @RequestParam(defaultValue = "10") int size) {
+    ResponsePagable<Customer> customers = this.customerService.selectAllCustomers(page, size);
     return ResponseEntity.ok().body(customers);
   }
 

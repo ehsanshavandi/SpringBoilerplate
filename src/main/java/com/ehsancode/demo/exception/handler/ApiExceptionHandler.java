@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
@@ -42,6 +43,18 @@ public class ApiExceptionHandler {
     ApiException apiException =
         new ApiException(
             "Validation Failed", null, HttpStatus.BAD_REQUEST, ZonedDateTime.now(), errorMap);
+    return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
+  public ResponseEntity<Object> handleMethodArgumentTypeMismatchException(
+      MethodArgumentTypeMismatchException methodArgumentTypeMismatchException) {
+    ApiException apiException =
+        new ApiException(
+            "Validation Failed, " + methodArgumentTypeMismatchException.getMessage(),
+            null,
+            HttpStatus.BAD_REQUEST,
+            ZonedDateTime.now());
     return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
   }
 }
