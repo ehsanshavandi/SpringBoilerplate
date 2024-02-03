@@ -1,13 +1,12 @@
 package com.ehsancode.demo.controllers;
 
-import java.util.List;
 
+import com.ehsancode.demo.dao.models.Customer;
 import com.ehsancode.demo.dto.ResponsePagable;
 import com.ehsancode.demo.dto.customer.CreateCustomerRequest;
+import com.ehsancode.demo.dto.customer.UpdateCustomerRequest;
 import com.ehsancode.demo.services.CustomerService;
-import com.ehsancode.demo.dao.models.Customer;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Null;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,9 +38,11 @@ public class CustomerController {
     this.customerService.createCustomer(createCustomerRequest);
   }
 
-  @PutMapping()
-  public void modifyCustomer(@Valid @RequestBody Customer customer) {
-    //    this.customerService.createCustomer(customer);
+  @PutMapping(path = "{id}")
+  public ResponseEntity<Customer> modifyCustomer(
+      @Valid @PathVariable int customerId, @Valid @RequestBody UpdateCustomerRequest request) {
+    Customer updatedCustomer = this.customerService.updateCustomer(customerId, request);
+    return ResponseEntity.ok().body(updatedCustomer);
   }
 
   @DeleteMapping(path = "{id}")

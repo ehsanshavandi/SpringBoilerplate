@@ -4,6 +4,7 @@ import com.ehsancode.demo.dao.models.Customer;
 import com.ehsancode.demo.dao.repositories.CustomerRepository;
 import com.ehsancode.demo.dto.ResponsePagable;
 import com.ehsancode.demo.dto.customer.CreateCustomerRequest;
+import com.ehsancode.demo.dto.customer.UpdateCustomerRequest;
 import com.ehsancode.demo.exception.appexceptions.AlreadyExistedException;
 import com.ehsancode.demo.exception.appexceptions.NotFoundException;
 import org.springframework.data.domain.Page;
@@ -46,6 +47,17 @@ public class CustomerService {
             customerRequest.getAge(),
             customerRequest.getPhone());
     this.customerRepository.save(customer);
+  }
+
+  public Customer updateCustomer(int customerId, UpdateCustomerRequest request) {
+    Customer customer =
+        this.customerRepository
+            .findById(customerId)
+            .orElseThrow(() -> new NotFoundException("Customer " + customerId));
+    if (request.getFirstName() != null) customer.setFirstName(request.getFirstName());
+    if (request.getLastName() != null) customer.setLastName(request.getLastName());
+    if (request.getAge() != null) customer.setAge(request.getAge());
+    return this.customerRepository.save(customer);
   }
 
   public void deleteCustomerById(int id) {
