@@ -1,22 +1,29 @@
 package com.ehsancode.demo.services;
 
 import com.ehsancode.demo.dao.models.Customer;
+import com.ehsancode.demo.dao.models.Order;
 import com.ehsancode.demo.dao.repositories.CustomerRepository;
+import com.ehsancode.demo.dao.repositories.OrderRepository;
 import com.ehsancode.demo.dto.ResponsePagable;
 import com.ehsancode.demo.dto.customer.CreateCustomerRequest;
 import com.ehsancode.demo.dto.customer.UpdateCustomerRequest;
 import com.ehsancode.demo.exception.appexceptions.AlreadyExistedException;
 import com.ehsancode.demo.exception.appexceptions.NotFoundException;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
   private final CustomerRepository customerRepository;
+  private final OrderRepository orderRepository;
 
-  public CustomerService(CustomerRepository customerRepository) {
+  public CustomerService(CustomerRepository customerRepository, OrderRepository orderRepository) {
     this.customerRepository = customerRepository;
+    this.orderRepository = orderRepository;
   }
 
   public ResponsePagable<Customer> selectAllCustomers(int page, int size) {
@@ -62,5 +69,13 @@ public class CustomerService {
 
   public void deleteCustomerById(int id) {
     this.customerRepository.deleteById(id);
+  }
+
+  public List<Order> findAllOrdersByCustomer(int id) {
+    Customer customer =
+        this.customerRepository
+            .findById(id)
+            .orElseThrow(() -> new NotFoundException("Customer " + id));
+    return this.orderRepository.findAllByCustomer(customer);
   }
 }

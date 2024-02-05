@@ -1,6 +1,7 @@
 package com.ehsancode.demo.controllers;
 
 import com.ehsancode.demo.dao.models.Customer;
+import com.ehsancode.demo.dao.models.Order;
 import com.ehsancode.demo.dto.ResponsePagable;
 import com.ehsancode.demo.dto.customer.CreateCustomerRequest;
 import com.ehsancode.demo.dto.customer.UpdateCustomerRequest;
@@ -8,6 +9,8 @@ import com.ehsancode.demo.services.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController()
 @RequestMapping("api/v1/customers")
@@ -47,5 +50,12 @@ public class CustomerController {
   @DeleteMapping(path = "{id}")
   public void removeCustomer(@Valid @PathVariable("id") int id) {
     this.customerService.deleteCustomerById(id);
+  }
+
+  //
+  @GetMapping(path = "/orders/{id}")
+  public ResponseEntity<List<Order>> getAllOrdersByCustomer(@Valid @PathVariable("id") int id) {
+    List<Order> orders = this.customerService.findAllOrdersByCustomer(id);
+    return ResponseEntity.ok().body(orders);
   }
 }
