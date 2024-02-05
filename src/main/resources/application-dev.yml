@@ -7,12 +7,12 @@ server:
 
 spring:
   datasource:
+    username: ehsan
     password: 123
     url: 'jdbc:postgresql://localhost:5432/ehsan'
-    username: ehsan
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: true

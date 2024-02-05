@@ -30,8 +30,7 @@ public class ProductSeeder implements CommandLineRunner {
     for (int i = 0; i < 5; i++) {
       String name = faker.programmingLanguage().name();
       Category category = new Category(name);
-      if (this.categoryRepository.findByName(name).isPresent()) continue;
-      else {
+      if (this.categoryRepository.findByName(name).isEmpty()) {
         this.categoryRepository.save(category);
         cateNames.add(name);
       }

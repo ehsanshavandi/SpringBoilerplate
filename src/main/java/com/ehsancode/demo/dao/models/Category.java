@@ -10,7 +10,7 @@ public class Category {
 
   @Id
   @GeneratedValue
-  @Column(name = "category_id", nullable = false, updatable = false)
+  @Column(name = "id", nullable = false, updatable = false)
   private Long categoryId;
 
   @Column(nullable = false, unique = true)
