@@ -8,9 +8,11 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @Table(name = "_user")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
   @Id
   @GeneratedValue

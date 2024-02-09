@@ -9,9 +9,9 @@ import com.ehsancode.demo.dto.customer.CreateCustomerRequest;
 import com.ehsancode.demo.dto.customer.UpdateCustomerRequest;
 import com.ehsancode.demo.exception.appexceptions.AlreadyExistedException;
 import com.ehsancode.demo.exception.appexceptions.NotFoundException;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +20,15 @@ import java.util.List;
 public class CustomerService {
   private final CustomerRepository customerRepository;
   private final OrderRepository orderRepository;
+  private final PasswordEncoder passwordEncoder;
 
-  public CustomerService(CustomerRepository customerRepository, OrderRepository orderRepository) {
+  public CustomerService(
+      CustomerRepository customerRepository,
+      OrderRepository orderRepository,
+      PasswordEncoder passwordEncoder) {
     this.customerRepository = customerRepository;
     this.orderRepository = orderRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   public ResponsePagable<Customer> selectAllCustomers(int page, int size) {
@@ -51,8 +56,10 @@ public class CustomerService {
             customerRequest.getFirstName(),
             customerRequest.getLastName(),
             customerRequest.getEmail(),
+            this.passwordEncoder.encode(customerRequest.getPassword()),
             customerRequest.getAge(),
-            customerRequest.getPhone());
+            customerRequest.getPhone(),
+            customerRequest.isVip());
     this.customerRepository.save(customer);
   }
 

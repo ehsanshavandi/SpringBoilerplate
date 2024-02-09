@@ -1,34 +1,35 @@
 package com.ehsancode.demo.dao.models;
 
+import com.ehsancode.demo.dao.models.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
 @Entity
-public class Customer {
+public class Customer extends User {
   @Id
   @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_sequence")
   @Column(updatable = false)
   private Integer id;
 
-  private String firstName;
-  private String lastName;
-
-  @Column(nullable = false, unique = true)
-  @Email
-  private String email;
-
+  private boolean isVip;
   private Integer age;
   private String phone;
 
   public Customer() {}
 
-  public Customer(String firstName, String lastName, String email, Integer age, String phone) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
+  public Customer(
+      String firstName,
+      String lastName,
+      String email,
+      String password,
+      Integer age,
+      String phone,
+      boolean isVip) {
+    super(firstName, lastName, email, password, Role.USER);
     this.age = age;
     this.phone = phone;
+    this.isVip = isVip;
   }
 
   public Integer getId() {
@@ -37,30 +38,6 @@ public class Customer {
 
   public void setId(Integer id) {
     this.id = id;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   public Integer getAge() {
@@ -79,16 +56,11 @@ public class Customer {
     this.phone = phone;
   }
 
-  @Override
-  public String toString() {
-    final StringBuilder sb = new StringBuilder("Customer{");
-    sb.append("id=").append(id);
-    sb.append(", firstName='").append(firstName).append('\'');
-    sb.append(", lastName='").append(lastName).append('\'');
-    sb.append(", email='").append(email).append('\'');
-    sb.append(", age=").append(age);
-    sb.append(", phone='").append(phone).append('\'');
-    sb.append('}');
-    return sb.toString();
+  public boolean isVip() {
+    return isVip;
+  }
+
+  public void setVip(boolean vip) {
+    isVip = vip;
   }
 }
